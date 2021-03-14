@@ -17,7 +17,7 @@
 using namespace std;
 
 // function to check if feature is already in current set. Used in Forward and Backward functions
-bool featue_Is_In(vector<int>, int);
+bool feature_Is_In(vector<int>, int);
 // function for forward search
 vector<int> Forward_Search(vector<vector<double>>);
 // function for backward elimination
