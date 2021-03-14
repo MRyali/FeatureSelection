@@ -11,7 +11,7 @@ using namespace std;
 
 // function to find euclidean distance between two elements using their features
 // Euclidean formula: https://www.geeksforgeeks.org/program-calculate-distance-two-points/
-double Euclidean_Distance(vector<double> vecA, <vector<double> vecB, vector<int> currFeatures) {
+double Euclidean_Distance(vector<double> vecA, vector<double> vecB, vector<int> currFeatures) {
     double distance = 0;
 
     for(int i = 0; i < currSet.size(); i++) {
@@ -37,7 +37,7 @@ double Leave_One_Out_Cross_Validation(vector<vector<double>> dataSet, vector<int
         for (int k = 0; k < dataSet.size(); k++) {
             // find distance between test and current data
             if (k != i) {
-                distance = Euclidean_Distance(testData, dataSet.at(k), currFeatures);
+                double distance = Euclidean_Distance(testData, dataSet.at(k), currFeatures);
                 if (distance < nn_dist) { // found new nearest neighbor
                     nn_dist = distance;
                     nn_location = k;
