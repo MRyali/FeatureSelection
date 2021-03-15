@@ -73,7 +73,19 @@ vector<int> Forward_Search(vector<vector<double>> dataSet) {
 }
 // function for backward elimination
 // Start with a set of all features and see how much better removing a feature would make your result
-void Backward_Elimination(vector<vector<double>>);
+void Backward_Elimination(vector<vector<double>>) {
+
+}
+
 // function to remove features
 // used in Backward_Elimination
-vector<int> Remove_Feature(vector<int>, int);
+// Credit: https://www.cplusplus.com/reference/vector/vector/erase/
+vector<int> Remove_Feature(vector<int>, int num) {
+    for (int i = 0; i < vec.size(); i++) {
+		if (vec.at(i) == num) { // the feaure is found
+			vec.erase(vec.begin() + i); // erase all from begining to the current feature
+			return vec;
+		}
+	}
+    return vec;
+}
