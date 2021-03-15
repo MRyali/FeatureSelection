@@ -33,8 +33,8 @@ vector<int> Forward_Search(vector<vector<double>> dataSet) {
         double best_so_far_accuracy = 0; // best accuracy so far (from Project video)
 
         for (int k = 1; k < dataSet.at(0).size(); k++) {
-            cout << "Consider adding the feature(s): {"
             if (!feature_Is_In(currFeatures, k)) { //only consider adding if not already added
+                cout << "Consider adding the feature(s): {"
                 for(int j = 0; j < currFeatures; j++) { // display features
                     cout << currFeatures.at(j) << ",";
                 }
@@ -73,8 +73,58 @@ vector<int> Forward_Search(vector<vector<double>> dataSet) {
 }
 // function for backward elimination
 // Start with a set of all features and see how much better removing a feature would make your result
-void Backward_Elimination(vector<vector<double>>) {
+void Backward_Elimination(vector<vector<double>> dataSet) {
+    vector<int> currFeatures;
+    double totalAccuracy = 0;
+    vector<int> bestFeatures; // set of best features
+    int featureToRemove; // feature to remove at each level
 
+    for (int i = 0; i < dataSet.at(0).size(); i++) {
+        currFeatures.push_back(i); // copy and add all of features
+    }
+
+    for (int i = 1; i < dataSet.at(0).size(); i++) {
+        double best_so_far_accuracy = 0; // store best accuracy
+        for (int k = 1; k < dataSet.at(0).size(); k++) {
+            if (feature_Is_In(currFeatures, k)) {
+                vector<int> tempFeat = Remove_Feature(currFeatures, k); // remove features
+
+                cout << "Consider adding the feature(s): {"
+                for(int j = 0; j < tempFeat.size(); j++) { // display features
+                    cout << tempFeat.at(j) << ",";
+                }
+                cout << k << "}. Accuracy is: ";
+
+                double accuracy = Leave_One_Out_Cross_Validation(dataSet, tempFeat);
+                cout << accuracy << endl; // print accuracy_h
+                if (accuracy > best_so_far_accuracy) {
+                    best_so_far_accuracy = accuracy; // best new best accuracy
+                    featureToRemove = k; // best feature to remove
+                }
+            }
+        }
+        // finding best features and accuracy
+        currFeatures = Remove_Feature(currFeatures, featureToRemove);
+        if (best_so_far_accuracy > totalAccuracy) {
+            totalAccuracy = best_so_far_accuracy; // store adbsolute best accuracy_h
+            bestFeatures = currFeatures; // store the best features
+        }
+        else { // if the accuracy is not better then it must be equal or worse so we warn. output frome sample project template
+            cout << "(Warning, Accuracy has decreased! Continuing search in case of local maxima)" << endl;
+            cout << "Feature set {";
+            for (int i = 0; i < currFeatures.size(); i++) {
+                cout << currFeatures.at(i) << ", ";
+            }
+            cout << "} was best, accuracy is " << (best_so_far_accuracy * 100) << "%" << endl << endl;
+        }
+    }
+    // Forward Search is done. We can print solution. Output adopted from Project template.
+    cout << "Finished search!! The best feature subset is {";
+    for (int i = 0; i < bestFeatures.size(); i++) {
+        cout << bestFeatures.at(i) << ",";
+    }
+    cout << "}, which has an accuracy of " << (totalAccuracy * 100) << "%" << endl;
+    return bestFeatures; // return the set containing of best features
 }
 
 // function to remove features
