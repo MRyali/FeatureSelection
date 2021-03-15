@@ -28,18 +28,18 @@ vector<int> Forward_Search(vector<vector<double>> dataSet) {
     double accuracy = 0;
 
     for(int i = 1; i < dataSet.at(0).size(); i++) {
-        vector<int> featureToAdd; // feature to add at this level
-        int featureToAdd;
+        //vector<int> featureToAdd;
+        int featureToAdd; // feature to add at this level
         double best_so_far_accuracy = 0; // best accuracy so far (from Project video)
 
         for (int k = 1; k < dataSet.at(0).size(); k++) {
             if (!feature_Is_In(currFeatures, k)) { //only consider adding if not already added
-                cout << "Consider adding the feature(s): {"
-                for(int j = 0; j < currFeatures; j++) { // display features
+                cout << "Adding the feature(s): {"
+                for(int j = 0; j < currFeatures.size(); j++) { // display features
                     cout << currFeatures.at(j) << ",";
                 }
                 cout << k << "}. Accuracy is: ";
-
+                // find accuracy
                 accuracy = Leave_One_Out_Cross_Validation(dataSet, currFeatures);
                 cout << accuracy << endl; // print accuracy_h
                 if (accuracy > best_so_far_accuracy) {
