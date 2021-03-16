@@ -44,7 +44,7 @@ double Leave_One_Out_Cross_Validation(vector<vector<double>> dataSet, vector<int
         for (int k = 0; k < dataSet.size(); k++) {
             // find distance between test and current data
             if (k != i) {
-                double distance = Euclidean_Distance(testData, dataSet.at(k), currFeatures, isForwards, k);
+                double distance = Euclidean_Distance(testData, dataSet.at(k), currFeatures, isForwards, num);
                 if (distance < nn_dist) { // found new nearest neighbor
                     nn_dist = distance;
                     nn_location = k;
