@@ -15,17 +15,20 @@ using namespace std;
 
 // function to find euclidean distance between two elements using their features
 // Euclidean formula: https://www.geeksforgeeks.org/program-calculate-distance-two-points/
-double Euclidean_Distance(vector<double> vecA, vector<double> vecB, vector<int> currFeatures) {
+double Euclidean_Distance(vector<double> vecA, vector<double> vecB, vector<int> currFeatures, bool isForwards, int num) {
     double distance = 0;
 
     for(int i = 0; i < currFeatures.size(); i++) {
         distance += (pow(vecA.at(currFeatures.at(i)) - vecB.at(currFeatures.at(i)), 2));
     }
+    if (isForwards) { // only run for forward selection when adding features
+            distance += (pow(vecA.at(num) - vecB.at(num), 2));
+    }
     return sqrt(distance);
 }
 // function for Leave_ One_Out_Cross_Validation
 // Credit: Adopted from Dr. Keogh's Slides on cross validation
-double Leave_One_Out_Cross_Validation(vector<vector<double>> dataSet, vector<int> currFeatures) {
+double Leave_One_Out_Cross_Validation(vector<vector<double>> dataSet, vector<int> currFeatures, bool isForwards, int num) {
     // number of instances in data
     double instances = (double)dataSet.size();
     // number of correct classifications
@@ -41,7 +44,7 @@ double Leave_One_Out_Cross_Validation(vector<vector<double>> dataSet, vector<int
         for (int k = 0; k < dataSet.size(); k++) {
             // find distance between test and current data
             if (k != i) {
-                double distance = Euclidean_Distance(testData, dataSet.at(k), currFeatures);
+                double distance = Euclidean_Distance(testData, dataSet.at(k), currFeatures, isForwards, k);
                 if (distance < nn_dist) { // found new nearest neighbor
                     nn_dist = distance;
                     nn_location = k;
@@ -59,5 +62,5 @@ double Leave_One_Out_Cross_Validation(vector<vector<double>> dataSet, vector<int
         }
     }
     // calculate accuracy
-    return correct / instances;
+    return correct / instances; //(double)instances;
 }

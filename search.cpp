@@ -42,7 +42,7 @@ void ForwardSearch(vector<vector<double>> dataSet) {
                 }
                 cout << k << "}. Accuracy is: ";
 
-                double accuracy = Leave_One_Out_Cross_Validation(dataSet, currFeatures);
+                double accuracy = Leave_One_Out_Cross_Validation(dataSet, currFeatures, true, k);
                 cout << accuracy << endl; // print accuracy_h
 
                 if (accuracy > best_so_far_accuracy) {
@@ -72,6 +72,7 @@ void ForwardSearch(vector<vector<double>> dataSet) {
         cout << bestFeatures.at(i) << ",";
     }
     cout << "} which has an accuracy of " << (totalAccuracy * 100) << "%" << endl;
+    //return bestFeatures; // return the set containing of best features
 }
 
 // function to remove features
@@ -89,7 +90,7 @@ vector<int> Remove_Feature(vector<int> vec, int num) {
 
 // function for backward elimination
 // Start with a set of all features and see how much better removing a feature would make your result
-// Credit: Adopted from Dr. Keogh's Project 2 video
+// Credit: Adopted form Dr. Keogh's Project 2 video
 void BackwardsElimination(vector<vector<double>> dataSet) {
     vector<int> currFeatures;
     double totalAccuracy = 0;
@@ -112,7 +113,7 @@ void BackwardsElimination(vector<vector<double>> dataSet) {
                 }
                 cout << k << "}. Accuracy is: ";
 
-                double accuracy = Leave_One_Out_Cross_Validation(dataSet, tempFeat);
+                double accuracy = Leave_One_Out_Cross_Validation(dataSet, tempFeat, false, k);
                 cout << accuracy << endl; // print accuracy_h
                 if (accuracy > best_so_far_accuracy) {
                     best_so_far_accuracy = accuracy; // best new best accuracy
