@@ -5,14 +5,15 @@
 //  Created by Mayur Ryali on 3/10/21.
 //
 
-#include "accuracy.h"
 #include "search.h"
+#include "accuracy.h"
 
-#include <string>
 #include <vector>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <algorithm>
+#include <cmath>
 
 using namespace std;
 
@@ -21,20 +22,21 @@ int main(int argc, const char * argv[]) {
     string fileName; // variable to store the name of the file
     string inputLine; // variable to store each line in file
     vector<vector<double>> dataSet; // set for features from file
-    vector<double> dataLine; // set for each line fo features
-    double val; // each individual feature
 
     int searchNum = 0; // variable to store feature selection search algorithm
 
     cout << "Welcome to Mayur Ryali's (862076991) Feature Selection Program." << endl;
-    cout << " Enter the name of the file you want to test: ";
+    //cout << " Enter the name of the file you want to test: ";
 
-    cin >> fileName; // store user input for file name
+    //cin >> fileName; // store user input for file name
 
-    ifstream testFile(fileName); // open file
+    ifstream testFile("/Users/mayurryali/Downloads/CS170_small_special_testdata_95.txt"); // open file
+
     if (testFile.is_open()) { // check if the file opened properly
         while (getline(testFile, inputLine)) {
+            vector<double> dataLine; // set for each line of features
             stringstream lStream(inputLine);
+            double val; // each individual feature
             while(lStream >> val) {
                 dataLine.push_back(val); // store entire line of features
             }
@@ -52,17 +54,17 @@ int main(int argc, const char * argv[]) {
     cout << "(2) Backward Elimination" << endl;
 
     // repeat until proper inputn is given
-    while (searchNum != 1 || searchNum != 2) {
+   while (searchNum != 1 && searchNum != 2) {
         cin >> searchNum; // user input for search algorithm
-    }
+   }
 
     cout << "Beginning search: " << endl << endl;
 
     if (searchNum == 1) {
-        Forward_Search(dataSet);
+        ForwardSearch(dataSet);
     }
     else if (searchNum == 2) {
-        Backward_Elimination(dataSet);
+        BackwardsElimination(dataSet);
     }
     else {
         cout << "Error. Invalid input." << endl;

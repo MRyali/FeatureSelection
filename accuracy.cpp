@@ -7,6 +7,10 @@
 
 #include "accuracy.h"
 
+#include <iostream>
+#include <vector>
+#include <cmath>
+
 using namespace std;
 
 // function to find euclidean distance between two elements using their features
@@ -14,7 +18,7 @@ using namespace std;
 double Euclidean_Distance(vector<double> vecA, vector<double> vecB, vector<int> currFeatures) {
     double distance = 0;
 
-    for(int i = 0; i < currSet.size(); i++) {
+    for(int i = 0; i < currFeatures.size(); i++) {
         distance += (pow(vecA.at(currFeatures.at(i)) - vecB.at(currFeatures.at(i)), 2));
     }
     return sqrt(distance);
@@ -23,14 +27,14 @@ double Euclidean_Distance(vector<double> vecA, vector<double> vecB, vector<int> 
 // Credit: Adopted from Dr. Keogh's Slides on cross validation
 double Leave_One_Out_Cross_Validation(vector<vector<double>> dataSet, vector<int> currFeatures) {
     // number of instances in data
-    double instances = (double)data.size();
+    double instances = (double)dataSet.size();
     // number of correct classifications
     double correct = 0;
 
     for(int i = 0; i < dataSet.size(); i++) {
-        vector<double> testData = data.at(i);
+        vector<double> testData = dataSet.at(i);
         double nn_dist = INT_MAX; // distance to nearest neighbor
-        int nn_location = INT_MAX; // ocation of nearest neighbor
+        int nn_location = INT_MAX; // location of nearest neighbor
         vector<double> nn_neighbor; // nearest neighbor
 
         // find nearest neighbors
@@ -41,7 +45,7 @@ double Leave_One_Out_Cross_Validation(vector<vector<double>> dataSet, vector<int
                 if (distance < nn_dist) { // found new nearest neighbor
                     nn_dist = distance;
                     nn_location = k;
-                    nn_neighbor = data.at(k);
+                    nn_neighbor = dataSet.at(k);
                 }
             }
         }
