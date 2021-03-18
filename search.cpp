@@ -96,7 +96,7 @@ void BackwardsElimination(vector<vector<double>> dataSet) {
     double totalAccuracy = 0;
     vector<int> bestFeatures; // set of best features
 
-    for (int i = 0; i < dataSet.at(0).size(); i++) {
+    for (int i = 1; i < dataSet.at(0).size(); i++) {
         currFeatures.push_back(i); // copy and add all of features
     }
 
