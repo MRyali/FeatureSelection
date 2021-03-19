@@ -1,9 +1,5 @@
 # FeatureSelection
 
-
-
-# 8PuzzleSolver
-
 # Project Information
 * CS 170: Introduction to AI, UCR
 * Winter 2021
