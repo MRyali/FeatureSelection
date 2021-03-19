@@ -1,0 +1,5 @@
+all: main.cpp FeatureSelection.o
+	g++ main.cpp FeatureSelection.o
+
+FeatureSelection: search.cpp search.h
+	g++ -c search.cpp -o FeatureSelection.o
