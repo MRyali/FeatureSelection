@@ -9,7 +9,7 @@
 <h1> Running the Program </h1>
 <d1>
   <dd>
-    This project is written C++. To run this project,
+    This project is written in C++. To run this project,
     compile with the <code>g++ -o main main.cpp</code> command and run with <code>./main</code>
    </dd>
 </d1>
