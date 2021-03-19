@@ -28,22 +28,22 @@ void ForwardSearch(vector<vector<double>> dataSet) {
     vector<int> currFeatures; // initialize an empty set
     vector<int> bestFeatures; // initialize set to hold best features
     double totalAccuracy = 0;
-    //double accuracy = 0;
+    int featureToAdd; // feature to add at this level
+    double accuracy = 0;
     // k-fold validation
     for(int i = 1; i < dataSet.at(0).size(); i++) {
         //vector<int> featureToAdd; // feature to add at this level
-        int featureToAdd; // feature to add at this level
         double best_so_far_accuracy = 0; // best accuracy so far (from Project video)
         for (int k = 1; k < dataSet.at(0).size(); k++) {
             if (!feature_Is_In(currFeatures, k)) { //only consider adding if not already added
-                cout << "Adding the feature(s): {";
+                cout << "Using the feature(s): {";
                 for(int j = 0; j < currFeatures.size(); j++) { // display features
                     cout << currFeatures.at(j) << ",";
                 }
                 cout << k << "}. Accuracy is: ";
 
-                double accuracy = Leave_One_Out_Cross_Validation(dataSet, currFeatures, true, k);
-                cout << accuracy << endl; // print accuracy_h
+                accuracy = Leave_One_Out_Cross_Validation(dataSet, currFeatures, true, k);
+                cout << accuracy * 100 << "%" << endl; // print accuracy_h
 
                 if (accuracy > best_so_far_accuracy) {
                     best_so_far_accuracy = accuracy; // best new best accuracy
@@ -62,17 +62,26 @@ void ForwardSearch(vector<vector<double>> dataSet) {
         }
         cout << "Feature set {";
         for (int i = 0; i < currFeatures.size(); i++) {
-                cout << currFeatures.at(i) << ", ";
+            if (i < currFeatures.size() - 1) {
+                cout << currFeatures.at(i) << ",";
+            }
+            else {
+                cout << currFeatures.at(i);
+            }
         }
         cout << "} was best. Accuracy is " << (best_so_far_accuracy * 100) << "%" << endl << endl;
     }
     // Forward Search is done. We can print solution. Output adopted from Project template.
     cout << "Finished search!! The best feature subset is {";
     for (int i = 0; i < bestFeatures.size(); i++) {
-        cout << bestFeatures.at(i) << ",";
+        if (i < bestFeatures.size() - 1) {
+            cout << bestFeatures.at(i) << ",";
+        }
+        else {
+            cout << bestFeatures.at(i);
+        }
     }
     cout << "} which has an accuracy of " << (totalAccuracy * 100) << "%" << endl;
-    //return bestFeatures; // return the set containing of best features
 }
 
 // function to remove features
@@ -95,26 +104,26 @@ void BackwardsElimination(vector<vector<double>> dataSet) {
     vector<int> currFeatures;
     double totalAccuracy = 0;
     vector<int> bestFeatures; // set of best features
+    int featureToRemove; // feature to remove at each level
+    double accuracy = 0;
 
     for (int i = 1; i < dataSet.at(0).size(); i++) {
         currFeatures.push_back(i); // copy and add all of features
     }
 
     for (int i = 1; i < dataSet.at(0).size(); i++) {
-        int featureToRemove; // feature to remove at each level
         double best_so_far_accuracy = 0; // store best accuracy
         for (int k = 1; k < dataSet.at(0).size(); k++) {
             if (feature_Is_In(currFeatures, k)) {
                 vector<int> tempFeat = Remove_Feature(currFeatures, k); // remove features
-
-                cout << "Adding the feature(s): {";
+                cout << "Using the feature(s): {";
                 for(int j = 0; j < tempFeat.size(); j++) { // display features
                     cout << tempFeat.at(j) << ",";
                 }
                 cout << k << "}. Accuracy is: ";
 
-                double accuracy = Leave_One_Out_Cross_Validation(dataSet, tempFeat, false, k);
-                cout << accuracy << endl; // print accuracy_h
+                accuracy = Leave_One_Out_Cross_Validation(dataSet, tempFeat, false, k);
+                cout << accuracy * 100 << "%" << endl; // print accuracy_h
                 if (accuracy > best_so_far_accuracy) {
                     best_so_far_accuracy = accuracy; // best new best accuracy
                     featureToRemove = k; // best feature to remove
@@ -132,14 +141,24 @@ void BackwardsElimination(vector<vector<double>> dataSet) {
         }
         cout << "Feature set {";
         for (int i = 0; i < currFeatures.size(); i++) {
-                cout << currFeatures.at(i) << ", ";
+            if (i < currFeatures.size() - 1) {
+                cout << currFeatures.at(i) << ",";
             }
+            else {
+                cout << currFeatures.at(i);
+            }
+        }
         cout << "} was best. Accuracy is " << (best_so_far_accuracy * 100) << "%" << endl << endl;
     }
     // Forward Search is done. We can print solution. Output adopted from Project template.
     cout << "Finished search!! The best feature subset is {";
     for (int i = 0; i < bestFeatures.size(); i++) {
-        cout << bestFeatures.at(i) << ",";
+        if (i < bestFeatures.size() - 1) {
+            cout << bestFeatures.at(i) << ",";
+        }
+        else {
+            cout << bestFeatures.at(i);
+        }
     }
     cout << "} which has an accuracy of " << (totalAccuracy * 100) << "%" << endl;
 }

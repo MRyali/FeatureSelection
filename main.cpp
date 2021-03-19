@@ -26,11 +26,14 @@ int main(int argc, const char * argv[]) {
     int searchNum = 0; // variable to store feature selection search algorithm
 
     cout << "Welcome to Mayur Ryali's (862076991) Feature Selection Program." << endl;
-    //cout << " Enter the name of the file you want to test: ";
+    cout << " Enter the name of the file you want to test: ";
 
-    //cin >> fileName; // store user input for file name
+    cin >> fileName; // store user input for file name
 
-    ifstream testFile("/Users/mayurryali/Downloads/CS170_small_special_testdata_95.txt"); // open file
+    // hard coded input
+    //ifstream testFile("/Users/mayurryali/Downloads/CS170_largetestdata_72.txt"); // open file
+
+    ifstream testFile(fileName);
 
     if (testFile.is_open()) { // check if the file opened properly
         while (getline(testFile, inputLine)) {
@@ -54,10 +57,21 @@ int main(int argc, const char * argv[]) {
     cout << "(2) Backward Elimination" << endl;
 
     // repeat until proper inputn is given
-   while (searchNum != 1 && searchNum != 2) {
+    while (searchNum != 1 && searchNum != 2) {
         cin >> searchNum; // user input for search algorithm
-   }
+    }
 
+    // print total features and instances in the set
+    cout << endl << "This dataset has " << dataSet.at(0).size() - 1 << " features (not including the class attribute), with " << dataSet.size() << " instances." << endl << endl;
+
+    // print accuracy of running nearest neighbor on all features
+    vector<int> temp;
+    for(int i = 1; i < dataSet.at(0).size(); i++) {
+        temp.push_back(i);
+    }
+    cout << "Running nearest neighbor with all " << dataSet.at(0).size() - 1 << " features, using “leaving-one-out” evaluation, I get an accuracy of " << Leave_One_Out_Cross_Validation(dataSet, temp, false, 1) * 100 << "%." << endl << endl;
+
+    // begin search algorithm
     cout << "Beginning search: " << endl << endl;
 
     if (searchNum == 1) {
