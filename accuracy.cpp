@@ -28,7 +28,7 @@ double Euclidean_Distance(vector<double> vecA, vector<double> vecB, vector<int> 
 }
 // function for Leave_ One_Out_Cross_Validation
 // Credit: Adopted from Dr. Keogh's Slides on cross validation
-double Leave_One_Out_Cross_Validation(vector<vector<double>> dataSet, vector<int> currFeatures, bool isForwards, int num) {
+double Leave_One_Out_Cross_Validation(vector<vector<double> > dataSet, vector<int> currFeatures, bool isForwards, int num) {
     // number of instances in data
     double instances = (double)dataSet.size();
     // number of correct classifications

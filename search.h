@@ -21,12 +21,12 @@ bool feature_Is_In(vector<int>, int);
 // function for forward search
 // Start with an empty set of features and see how well adding a feature makes
 // Crdit: Adopted form Dr. Keogh's Project 2 video
-void ForwardSearch(vector<vector<double>>);
+void ForwardSearch(vector<vector<double> >);
 
 // function for backward elimination
 // Start with a set of all features and see how much better removing a feature would make your result
 // Credit: Adopted from Dr. Keough's Project 2 video
-void BackwardsElimination(vector<vector<double>>);
+void BackwardsElimination(vector<vector<double> >);
 
 // function to remove features
 // used in Backward_Elimination

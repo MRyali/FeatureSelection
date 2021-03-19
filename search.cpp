@@ -24,7 +24,7 @@ bool feature_Is_In(vector<int> currSet, int num) {
 // function for forward search
 // Start with an empty set of features and see how well adding a feature makes
 // Crdit: Adopted form Dr. Keogh's Project 2 video
-void ForwardSearch(vector<vector<double>> dataSet) {
+void ForwardSearch(vector<vector<double> > dataSet) {
     vector<int> currFeatures; // initialize an empty set
     vector<int> bestFeatures; // initialize set to hold best features
     double totalAccuracy = 0;
@@ -100,7 +100,7 @@ vector<int> Remove_Feature(vector<int> vec, int num) {
 // function for backward elimination
 // Start with a set of all features and see how much better removing a feature would make your result
 // Credit: Adopted form Dr. Keogh's Project 2 video
-void BackwardsElimination(vector<vector<double>> dataSet) {
+void BackwardsElimination(vector<vector<double> > dataSet) {
     vector<int> currFeatures;
     double totalAccuracy = 0;
     vector<int> bestFeatures; // set of best features

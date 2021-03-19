@@ -19,6 +19,6 @@ using namespace std;
 double Euclidean_Distance(vector<double>, vector<double>, vector<int>, bool, int);
 
 // function for Leave_One_Out_Cross_Validation
-double Leave_One_Out_Cross_Validation(vector<vector<double>>, vector<int>, bool, int);
+double Leave_One_Out_Cross_Validation(vector<vector<double> >, vector<int>, bool, int);
 
 #endif /* accuracy_h */
