@@ -15,12 +15,12 @@
 </d1>
 
 # Algorithms
-<p>There are three algorithms to solve the puzzle:</p>
+<p>There are two search algorithms:</p>
 
 <ul>
-<li>Uniform Cost Search</li>
-<li>A* with Misplaced Tile Heuristic</li>
-<li>A* with Manhattan Distance Heuristic</li>
+<li>Forward Selection</li>
+<li>Backward Elimination</li>
 </ul>
 
-<p>When running the program, follow the directions on the console exactly. When entering a custom puzzle please include a space between each number and hit enter when a complete row has been entered. If a solution is found from a valid user input, the program will display the total nodes expanded, the max nodes in the queue, and the depth of the solution.  </p>
+<p>When running the program, follow the directions on the console exactly. Make sure the test data file is in the same folder you are in when compiling and running. You may need to include the complete file path if the file is not recognized. </p>
+
