@@ -5,8 +5,8 @@
 //  Created by Mayur Ryali on 3/10/21.
 //
 
-#include "search.h"
-#include "accuracy.h"
+#include "search.cpp"
+#include "accuracy.cpp"
 
 #include <vector>
 #include <fstream>
