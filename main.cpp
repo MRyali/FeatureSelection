@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     string fileName; // variable to store the name of the file
     string inputLine; // variable to store each line in file
-    vector<vector<double>> dataSet; // set for features from file
+    vector<vector<double> > dataSet; // set for features from file
 
     int searchNum = 0; // variable to store feature selection search algorithm
 
