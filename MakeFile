@@ -1,5 +1,5 @@
-all: main.cpp FeatureSelection.o
-	g++ main.cpp FeatureSelection.o
+all: main.cpp
+	gcc -g -Wall -o main main.cpp
 
-FeatureSelection: search.cpp search.h
-	g++ -c search.cpp -o FeatureSelection.o
+clean:
+	$(RM) main
